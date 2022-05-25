@@ -43,9 +43,8 @@ class User
         \Gateway\User::getInstance()->beginTransaction();
         foreach ($users as $user) {
             try {
-                \Gateway\User::add($user['name'], $user['lastName'], $user['age']);
+                $ids[] = \Gateway\User::add($user['name'], $user['lastName'], $user['age']);
                 \Gateway\User::getInstance()->commit();
-                $ids[] = \Gateway\User::getInstance()->lastInsertId();
             } catch (\Exception $e) {
                 \Gateway\User::getInstance()->rollBack();
             }
